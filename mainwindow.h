@@ -12,6 +12,9 @@
 #include <QString>
 #include <QPainter>
 #include <QVector>
+#include <QPushButton>
+#include <QContextMenuEvent>
+#include <QMenu>
 #include <stdlib.h>
 
 enum Action{STAY,JUMP};
@@ -31,7 +34,10 @@ protected:
     //绘制
     void paintEvent(QPaintEvent* event) override;
 
+    void contextMenuEvent(QContextMenuEvent *event);
+
 private:
+    bool showCloseButton;
     //鼠标移动
     QPoint lastMosuePoint;
 

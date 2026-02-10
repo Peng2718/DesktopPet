@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     setMouseTracking(true);
     animations.resize(2);
     State = Action::STAY;
+    showCloseButton = false;
     //动画
     for(int i=1;i<=151;i++){
         //保证格式
@@ -80,12 +81,32 @@ void MainWindow::paintEvent(QPaintEvent* event){
                            animations[0][currentAnimation]);
         break;
     }
+    if(showCloseButton){
+        QPushButton* close = new QPushButton("关闭",this);
+        connect(close,&QPushButton::clicked,this,[=](){
+            this->close();
+        });
+    }
+}
+
+void MainWindow::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu(this);
+    menu.addAction("退出", this, &MainWindow::close);
+    menu.addAction("换皮肤", this, [=]() {
+        // 切换另一套动画帧
+    });
+    menu.exec(event->globalPos());
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* event){
     if(event->button()==Qt::LeftButton){
         lastMosuePoint = event->globalPos()-frameGeometry().topLeft();
+        showCloseButton=false;
         event->accept();
+    }
+    if(event->button()==Qt::RightButton){
+        showCloseButton=true;
     }
 }
 
