@@ -6,6 +6,11 @@
 #include <QApplication>
 #include <QScreen>
 #include <QMouseEvent>
+#include <QTimer>
+#include <QList>
+#include <QPixmap>
+#include <QString>
+#include <QPainter>
 
 class MainWindow : public QWidget
 {
@@ -16,10 +21,19 @@ public:
     ~MainWindow();
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
+    //鼠标移动
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    //绘制
+    void paintEvent(QPaintEvent* event) override;
 
 private:
+    //鼠标移动
     QPoint lastMosuePoint;
+
+    //动画
+    QList<QPixmap> animations;
+    int currentAnimation;
+    QTimer* animationTimer;
 };
 #endif // MAINWINDOW_H
