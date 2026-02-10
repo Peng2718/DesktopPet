@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
 
