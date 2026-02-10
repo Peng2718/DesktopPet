@@ -17,7 +17,16 @@ MainWindow::MainWindow(QWidget *parent)
         //保证格式
         QString path = QString("F:/Pet制作记录/动画图片1/pet%1.png").arg(i,4,10,QChar('0'));
         if(!QPixmap(path)){
-            qDebug()<<"wu";
+            qDebug()<<"error";
+            exit(-1);
+        }
+        animations.append(QPixmap(path).scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
+    for(int i=1;i<=151;i++){
+        //保证格式
+        QString path = QString("F:/Pet制作记录/动画图片2/pet_walk%1.png").arg(i,4,10,QChar('0'));
+        if(!QPixmap(path)){
+            qDebug()<<"error";
             exit(-1);
         }
         animations.append(QPixmap(path).scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
